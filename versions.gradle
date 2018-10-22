@@ -50,6 +50,7 @@ versions.kotlin = "1.2.71"
 versions.paging = "2.1.0-alpha01"
 versions.navigation = "1.0.0-alpha06"
 versions.work = "1.0.0-alpha10"
+versions.leakcanary = "1.6.1"
 def deps = [:]
 
 def support = [:]
@@ -123,6 +124,12 @@ deps.kotlin = kotlin
 
 deps.paging_ktx = "androidx.paging:paging-runtime-ktx:$versions.paging"
 
+def leakcanary = [:]
+leakcanary.debug = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
+leakcanary.release = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanary"
+leakcanary.fragment = "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakcanary"
+deps.leakcanary = leakcanary
+
 def glide = [:]
 glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
 glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
@@ -137,10 +144,12 @@ deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
 deps.hamcrest = "org.hamcrest:hamcrest-all:$versions.hamcrest"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 deps.rxkotlin = "io.reactivex.rxjava2:rxkotlin:2.3.0"
+deps.stetho = 'com.facebook.stetho:stetho:1.5.0'
+deps.robolectric = "org.robolectric:robolectric:3.8"
 ext.deps = deps
 
 def build_versions = [:]
-build_versions.min_sdk = 14
+build_versions.min_sdk = 23
 build_versions.target_sdk = 28
 build_versions.build_tools = "28.0.3"
 ext.build_versions = build_versions

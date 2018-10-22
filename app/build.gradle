@@ -40,9 +40,18 @@ android {
         androidTest.java.srcDirs += "src/test-common/java"
         test.java.srcDirs += "src/test-common/java"
     }
+
+
+    dynamicFeatures = [":mediaFeed"]
+
+
 }
 
 dependencies {
+    debugImplementation deps.leakcanary.debug
+    releaseImplementation deps.leakcanary.release
+    debugImplementation deps.leakcanary.fragment
+
     implementation deps.support.app_compat
     implementation deps.support.recyclerview
     implementation deps.support.cardview
@@ -66,6 +75,8 @@ dependencies {
     implementation deps.rx_android
     implementation deps.timber
 
+    debugImplementation deps.stetho
+
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
     kapt deps.room.compiler
@@ -75,6 +86,7 @@ dependencies {
     testImplementation deps.mock_web_server
     testImplementation deps.arch_core.testing
     testImplementation deps.mockito.core
+    testImplementation deps.robolectric
 
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.atsl.rules

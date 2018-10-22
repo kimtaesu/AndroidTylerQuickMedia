@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidTylerQuickMedia</string>
+    <string name="title_mediafeed">MediaFeed</string>
 </resources>
