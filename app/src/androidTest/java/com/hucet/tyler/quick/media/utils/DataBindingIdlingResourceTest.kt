@@ -16,21 +16,20 @@
 
 package com.hucet.tyler.memo.utils
 
-import android.databinding.DataBindingComponent
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso
-import android.support.test.espresso.IdlingRegistry
-import android.support.test.espresso.IdlingResource
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.databinding.library.R
-import com.hucet.tyler.memo.SingleFragmentActivity
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.ViewDataBinding
+import androidx.databinding.library.R
+import androidx.fragment.app.Fragment
+import androidx.test.InstrumentationRegistry
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.IdlingResource
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
@@ -38,7 +37,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.FutureTask
@@ -122,9 +120,9 @@ class DataBindingIdlingResourceTest {
     class TestFragment : Fragment() {
         lateinit var fakeBinding: FakeBinding
         override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+                inflater: LayoutInflater,
+                container: ViewGroup?,
+                savedInstanceState: Bundle?
         ): View {
             val view = View(container!!.context)
             fakeBinding = FakeBinding(view)
@@ -132,7 +130,7 @@ class DataBindingIdlingResourceTest {
         }
     }
 
-    class FakeBinding(view: View) : ViewDataBinding(Mockito.mock(DataBindingComponent::class.java), view, 0) {
+    class FakeBinding(view: View) : ViewDataBinding(mock<DataBindingComponent>(), view, 0) {
         val hasPendingBindings = AtomicBoolean(false)
 
         init {
@@ -154,19 +152,19 @@ class DataBindingIdlingResourceTest {
     }
 
     private fun isIdle(): Boolean {
-        val task = FutureTask<Boolean>({
+        val task = FutureTask<Boolean> {
             return@FutureTask idlingResource.isIdleNow
-        })
+        }
         InstrumentationRegistry.getInstrumentation().runOnMainSync(task)
         return task.get()
     }
 
     private fun registerIdleCallback(): IdlingResource.ResourceCallback {
-        val task = FutureTask<IdlingResource.ResourceCallback>({
-            val callback = mock(IdlingResource.ResourceCallback::class.java)
+        val task = FutureTask<IdlingResource.ResourceCallback> {
+            val callback = mock<IdlingResource.ResourceCallback>()
             idlingResource.registerIdleTransitionCallback(callback)
             return@FutureTask callback
-        })
+        }
         InstrumentationRegistry.getInstrumentation().runOnMainSync(task)
         return task.get()
     }

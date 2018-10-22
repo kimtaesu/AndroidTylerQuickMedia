@@ -18,13 +18,13 @@ package com.hucet.tyler.memo.utils
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.test.rule.ActivityTestRule
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.test.rule.ActivityTestRule
 
 /**
  * Utility methods for espresso tests.
@@ -40,10 +40,10 @@ object EspressoTestUtil {
             .registerFragmentLifecycleCallbacks(
                 object : FragmentManager.FragmentLifecycleCallbacks() {
                     override fun onFragmentViewCreated(
-                        fm: FragmentManager,
-                        f: Fragment,
-                        v: View,
-                        savedInstanceState: Bundle?
+                            fm: FragmentManager,
+                            f: Fragment,
+                            v: View,
+                            savedInstanceState: Bundle?
                     ) {
                         // traverse searchView views, if any is a progress bar, replace its animation
                         traverseViews(v)

@@ -18,8 +18,8 @@ package com.hucet.tyler.memo.utils
 
 import android.app.Application
 import android.content.Context
-import android.support.test.runner.AndroidJUnitRunner
-import com.hucet.tyler.memo.TestApp
+import androidx.test.runner.AndroidJUnitRunner
+import com.hucet.tyler.quick.media.TestApp
 
 /**
  * Custom runner to disable dependency injection.

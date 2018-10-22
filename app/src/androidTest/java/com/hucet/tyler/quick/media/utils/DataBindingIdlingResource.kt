@@ -16,13 +16,13 @@
 
 package com.hucet.tyler.memo.utils
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
-import android.support.test.espresso.IdlingResource
-import android.support.test.rule.ActivityTestRule
-import android.support.v4.app.FragmentActivity
 import android.view.View
-import java.util.UUID
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentActivity
+import androidx.test.espresso.IdlingResource
+import androidx.test.rule.ActivityTestRule
+import java.util.*
 
 /**
  * An espresso idling resource implementation that reports idle status for searchView data binding
@@ -32,7 +32,7 @@ import java.util.UUID
  * of the whole view tree.
  */
 class DataBindingIdlingResource(
-    private val activityTestRule: ActivityTestRule<*>
+        private val activityTestRule: ActivityTestRule<*>
 ) : IdlingResource {
     // list of registered callbacks
     private val idlingCallbacks = mutableListOf<IdlingResource.ResourceCallback>()
@@ -69,18 +69,18 @@ class DataBindingIdlingResource(
     }
 
     /**
-     * Find searchView binding classes in searchView currently available fragments.
+     * Find all binding classes in all currently available fragments.
      */
     private fun getBindings(): List<ViewDataBinding> {
         return (activityTestRule.activity as? FragmentActivity)
-            ?.supportFragmentManager
-            ?.fragments
-            ?.mapNotNull {
-                it.view?.let { view ->
-                    DataBindingUtil.getBinding<ViewDataBinding>(
-                        view
-                    )
-                }
-            } ?: emptyList()
+                ?.supportFragmentManager
+                ?.fragments
+                ?.mapNotNull {
+                    it.view?.let { view ->
+                        DataBindingUtil.getBinding<ViewDataBinding>(
+                                view
+                        )
+                    }
+                } ?: emptyList()
     }
 }
