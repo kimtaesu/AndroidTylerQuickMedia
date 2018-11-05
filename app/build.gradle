@@ -43,8 +43,6 @@ android {
 
 
     dynamicFeatures = [":mediaFeed"]
-
-
 }
 
 dependencies {
@@ -102,7 +100,6 @@ dependencies {
 
     androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.mockito.core
-    androidTestImplementation deps.mockito.android
 }
 
 

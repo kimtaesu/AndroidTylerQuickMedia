@@ -5,6 +5,7 @@ import android.app.Application
 import com.hucet.tyler.memo.OpenForTesting
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import kr.co.irobo.advice.di.AppInjector
 import javax.inject.Inject
 
 
@@ -17,22 +18,6 @@ class MyApplication : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-//        AppInjector.init(this)
-//        fetchRemoteConfig()
+        AppInjector.init(this)
     }
-//    private fun fetchRemoteConfig() {
-//        FirebaseApp.initializeApp(this)
-//        FirebaseRemoteConfig.getInstance().apply {
-//            setConfigSettings(FirebaseRemoteConfigSettings.Builder()
-//                    .setDeveloperModeEnabled(BuildConfig.DEBUG)
-//                    .build())
-//            setDefaults(R.xml.default_remote_config)
-//        }.run {
-//            val cacheExpirationSecond = if (BuildConfig.DEBUG) 0L else 60 * 60 * 12 // 12 hours
-//            fetch(cacheExpirationSecond).addOnCompleteListener { task ->
-//                if (task.isSuccessful) activateFetched()
-//            }
-//        }
-//    }
-
 }
