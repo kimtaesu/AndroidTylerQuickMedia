@@ -20,13 +20,16 @@ import android.app.Application
 import com.hucet.tyler.quick.media.MyApplication
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjection
 import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [
-        AndroidInjectionModule::class]
+        modules = [
+            ActivityModule::class,
+            RoomModule::class,
+            AndroidInjectionModule::class]
 )
 interface AppComponent {
     @Component.Builder

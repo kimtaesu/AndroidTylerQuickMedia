@@ -19,6 +19,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.hucet.tyler.quick.media.utils.TestRunner"
+
+        buildConfigField 'String', 'KAKAO_BASE_URL', "https://dapi.kakao.com"
+        buildConfigField 'String', 'NAVER_BASE_URL', "https://openapi.naver.com"
+        buildConfigField 'Long', 'NETWORK_TIMEOUT_MILLIS', "3000"
+        // TODO: must hide
+        buildConfigField 'String', 'KAKAO_API_KEY', "8c84f32197bb0fb2ccba0d7d73c57863"
+        buildConfigField 'String', 'NAVER_CLIENT_ID', "vDnrwSb8JwlKV279nbtS"
+        buildConfigField 'String', 'NAVER_CLIENT_SECRET', "eTibrDU9sZ"
     }
     buildTypes {
         debug {
@@ -40,8 +48,6 @@ android {
         androidTest.java.srcDirs += "src/test-common/java"
         test.java.srcDirs += "src/test-common/java"
     }
-
-
     dynamicFeatures = [":mediaFeed"]
 }
 
@@ -63,6 +69,8 @@ dependencies {
     implementation deps.retrofit.gson
     implementation deps.glide.runtime
 
+    implementation deps.okhttp_logging_interceptor
+
     implementation deps.dagger.runtime
     implementation deps.dagger.android
     implementation deps.dagger.android_support
@@ -70,6 +78,7 @@ dependencies {
     implementation deps.kotlin.stdlib
 
     implementation deps.rxkotlin
+    implementation deps.timber
     implementation deps.rx_android
     implementation deps.timber
 

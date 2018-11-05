@@ -16,4 +16,13 @@ android {
 
 dependencies {
     implementation project(':app')
+    kapt deps.dagger.compiler
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    implementation deps.kotlin.stdlib
+    implementation deps.rxkotlin
+    implementation deps.timber
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
 }
