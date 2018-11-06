@@ -10,7 +10,6 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface KakaoApi {
-    @Headers("Content-Type: application/json;charset=UTF-8")
     @GET("/v2/search/image")
     fun searchImage(@Body request: KakaoRequest): Single<Response<KakaoImageResponse>>
 

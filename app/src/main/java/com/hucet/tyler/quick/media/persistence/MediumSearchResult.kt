@@ -16,7 +16,7 @@ import java.util.*
 @TypeConverters(PageInfosConverters::class)
 data class MediumSearchResult(
         val query: String,
-        var pageInfos: Map<String, PageInfo>,
+        var pageInfos: Map<String, PageInfo> = PageInfo.initPageInfos(),
         @SearchOptions.SortType var sortType: Int = SearchOptions.accuracy,
         @SearchOptions.CategoryType var categoryType: Int = SearchOptions.all,
         val updatedTime: Long = System.currentTimeMillis(),

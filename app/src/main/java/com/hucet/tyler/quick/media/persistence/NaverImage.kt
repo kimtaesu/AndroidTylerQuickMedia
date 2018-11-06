@@ -21,13 +21,8 @@ data class NaverImage(
         val title: String,
         override val thumbnail: String,
         val sizeheight: String,
-        val sizewidth: String,
-        @ColumnInfo(name = MediumSearchResult.SEARCH_RESULT_ID)
-        val searchResultId: Long,
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = NAVER_IMAGE_ID)
-        var id: Long = 0
-) : HasMedia {
+        val sizewidth: String
+) : BasicMedia() {
     companion object {
         const val NAVER_IMAGE_TABLE = "naver_images"
         const val NAVER_IMAGE_ID = "naver_image_id"

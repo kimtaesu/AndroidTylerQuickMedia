@@ -24,13 +24,9 @@ data class KakaoVclip(val title: String,
                       val playTime: Int,
                       val author: String,
                       @SerializedName("datetime")
-                      val datetime: String,
-                      @ColumnInfo(name = SEARCH_RESULT_ID)
-                      val searchResultId: Long,
-                      @PrimaryKey(autoGenerate = true)
-                      @ColumnInfo(name = KAKAO_VCLIP_ID)
-                      var id: Long = 0
-) : HasMedia {
+                      val datetime: String
+
+) : BasicMedia() {
     companion object {
         const val KAKAO_VCLIP_TABLE = "kakao_vclips"
         const val KAKAO_VCLIP_ID = "kakao_vclip_id"

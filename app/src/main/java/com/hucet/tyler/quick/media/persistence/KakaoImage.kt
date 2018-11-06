@@ -28,13 +28,8 @@ data class KakaoImage(
         @SerializedName("display_sitename")
         val displaySiteName: String,
         val doc_url: String,
-        val datetime: String,
-        @ColumnInfo(name = MediumSearchResult.SEARCH_RESULT_ID)
-        val searchResultId: Long,
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = KAKAO_IMAGE_ID)
-        var id: Long = 0
-) : HasMedia {
+        val datetime: String
+) : BasicMedia() {
     companion object {
         const val KAKAO_IMAGE_TABLE = "kakao_image_table"
         const val KAKAO_IMAGE_ID = "kakao_image_id"
