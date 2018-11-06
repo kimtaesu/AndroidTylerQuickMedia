@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-
 apply plugin: 'kotlin-allopen'
 allOpen {
     // allows mocking for classes w/o directly opening them for release builds
@@ -18,15 +18,15 @@ android {
         targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "com.hucet.tyler.quick.media.utils.TestRunner"
+        testInstrumentationRunner "com.hucet.tyler.quick.media.android.testing.utils.TestRunner"
 
-        buildConfigField 'String', 'KAKAO_BASE_URL', "https://dapi.kakao.com"
-        buildConfigField 'String', 'NAVER_BASE_URL', "https://openapi.naver.com"
-        buildConfigField 'Long', 'NETWORK_TIMEOUT_MILLIS', "3000"
+        buildConfigField 'String', 'KAKAO_BASE_URL', '"https://dapi.kakao.com"'
+        buildConfigField 'String', 'NAVER_BASE_URL', '"https://openapi.naver.com"'
+        buildConfigField 'Long', 'NETWORK_TIMEOUT_MILLIS', "3000L"
         // TODO: must hide
-        buildConfigField 'String', 'KAKAO_API_KEY', "8c84f32197bb0fb2ccba0d7d73c57863"
-        buildConfigField 'String', 'NAVER_CLIENT_ID', "vDnrwSb8JwlKV279nbtS"
-        buildConfigField 'String', 'NAVER_CLIENT_SECRET', "eTibrDU9sZ"
+        buildConfigField 'String', 'KAKAO_API_KEY', '"8c84f32197bb0fb2ccba0d7d73c57863"'
+        buildConfigField 'String', 'NAVER_CLIENT_ID', '"vDnrwSb8JwlKV279nbtS"'
+        buildConfigField 'String', 'NAVER_CLIENT_SECRET', '"eTibrDU9sZ"'
     }
     buildTypes {
         debug {
@@ -48,7 +48,6 @@ android {
         androidTest.java.srcDirs += "src/test-common/java"
         test.java.srcDirs += "src/test-common/java"
     }
-    dynamicFeatures = [":mediaFeed"]
 }
 
 dependencies {
@@ -61,7 +60,10 @@ dependencies {
     implementation deps.support.cardview
     implementation deps.support.design
     implementation deps.navigation.fragment_ktx
+
     implementation deps.room.runtime
+    implementation deps.room.rxjava2
+
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
     implementation deps.lifecycle.java8

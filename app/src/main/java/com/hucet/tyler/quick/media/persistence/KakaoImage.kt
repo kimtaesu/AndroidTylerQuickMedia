@@ -1,15 +1,15 @@
 package com.hucet.tyler.quick.media.persistence
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import com.hucet.tyler.quick.media.model.HasMedia
+import com.hucet.tyler.quick.media.persistence.KakaoImage.Companion.KAKAO_IMAGE_ID
 import com.hucet.tyler.quick.media.persistence.KakaoImage.Companion.KAKAO_IMAGE_TABLE
+import java.util.*
 
 @Entity(
         tableName = KAKAO_IMAGE_TABLE,
+        indices = [Index(MediumSearchResult.SEARCH_RESULT_ID)],
         foreignKeys = [(ForeignKey(
                 entity = MediumSearchResult::class,
                 parentColumns = [(MediumSearchResult.SEARCH_RESULT_ID)],
@@ -33,7 +33,7 @@ data class KakaoImage(
         val searchResultId: Long,
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = KAKAO_IMAGE_ID)
-        var id: Int = 0
+        var id: Long = 0
 ) : HasMedia {
     companion object {
         const val KAKAO_IMAGE_TABLE = "kakao_image_table"

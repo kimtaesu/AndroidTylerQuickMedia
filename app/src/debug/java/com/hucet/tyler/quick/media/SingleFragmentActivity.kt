@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hucet.tyler.memo
+package com.hucet.tyler.quick.media
 
 import android.os.Bundle
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.hucet.tyler.memo.debug
+package com.hucet.tyler.quick.media.debug
 
 import timber.log.Timber
 

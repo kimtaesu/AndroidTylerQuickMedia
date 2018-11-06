@@ -1,1 +1,1 @@
-include ':app', ':mediaFeed'
+include ':app'

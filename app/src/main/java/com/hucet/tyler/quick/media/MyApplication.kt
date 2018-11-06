@@ -2,7 +2,6 @@ package com.hucet.tyler.quick.media
 
 import android.app.Activity
 import android.app.Application
-import com.hucet.tyler.memo.OpenForTesting
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import kr.co.irobo.advice.di.AppInjector

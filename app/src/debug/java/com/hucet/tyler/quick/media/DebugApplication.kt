@@ -1,11 +1,9 @@
-package com.hucet.tyler.memo
+package com.hucet.tyler.quick.media
 
 
 import android.app.Application
 import com.facebook.stetho.Stetho
-import com.hucet.tyler.memo.debug.OptionalTree
-import com.hucet.tyler.quick.media.BuildConfig
-import com.hucet.tyler.quick.media.MyApplication
+import com.hucet.tyler.quick.media.debug.OptionalTree
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 

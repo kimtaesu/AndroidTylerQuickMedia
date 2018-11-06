@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.hucet.tyler.quick.media.utils.autoCleared
+import com.hucet.tyler.quick.media.android.testing.utils.autoCleared
 import javax.inject.Inject
 
 abstract class BindingFragment<T : ViewDataBinding> : Fragment() {

@@ -4,12 +4,12 @@
     package="com.hucet.tyler.quick.media">
 
   <application
-      android:name="com.hucet.tyler.memo.DebugApplication"
+      android:name=".DebugApplication"
       android:allowBackup="true"
       android:debuggable="true"
       tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode"
       tools:replace="android:name">
-    <activity android:name="com.hucet.tyler.memo.SingleFragmentActivity"></activity>
+    <activity android:name=".SingleFragmentActivity"></activity>
   </application>
 
 </manifest>

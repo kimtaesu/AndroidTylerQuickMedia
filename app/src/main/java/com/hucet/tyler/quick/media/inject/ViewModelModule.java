@@ -1,6 +1,6 @@
 package com.hucet.tyler.quick.media.inject;
 
-import com.hucet.tyler.quick.media.utils.ViewModelFactory;
+import com.hucet.tyler.quick.media.android.testing.utils.ViewModelFactory;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

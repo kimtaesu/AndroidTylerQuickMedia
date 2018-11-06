@@ -1,16 +1,15 @@
 package com.hucet.tyler.quick.media.persistence
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import com.hucet.tyler.quick.media.model.HasMedia
 import com.hucet.tyler.quick.media.persistence.KakaoVclip.Companion.KAKAO_VCLIP_TABLE
 import com.hucet.tyler.quick.media.persistence.MediumSearchResult.Companion.SEARCH_RESULT_ID
+import java.util.*
 
 @Entity(
         tableName = KAKAO_VCLIP_TABLE,
+        indices = [Index(SEARCH_RESULT_ID)],
         foreignKeys = [(ForeignKey(
                 entity = MediumSearchResult::class,
                 parentColumns = [(SEARCH_RESULT_ID)],
@@ -30,7 +29,7 @@ data class KakaoVclip(val title: String,
                       val searchResultId: Long,
                       @PrimaryKey(autoGenerate = true)
                       @ColumnInfo(name = KAKAO_VCLIP_ID)
-                      var id: Int = 0
+                      var id: Long = 0
 ) : HasMedia {
     companion object {
         const val KAKAO_VCLIP_TABLE = "kakao_vclips"

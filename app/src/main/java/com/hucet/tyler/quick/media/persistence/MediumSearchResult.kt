@@ -8,13 +8,16 @@ import java.util.*
         tableName = SEARCH_RESULT_TABLE,
         indices = [Index("query")]
 )
+
 data class MediumSearchResult(
         val query: String,
-//val medium_ids = List<String>()
-        val sortType: SearchSortType = SearchSortType.recency,
-        val categoryType: Int = SearchCategoryOptionType.all.bit,
-        @Embedded
-        val nextInfo: NextInfo = NextInfo(),
+//        @TypeConverters(SortTypeConverter::class)
+//        var sortType: SearchSortType = SearchSortType.recency,
+//        @TypeConverters(SearchCategoryOptionType::class)
+//        var categoryType: Int = SearchCategoryOptionType.all.bit,
+//        @Embedded
+//        @TypeConverters(DataSourceTypeConverter::class)
+//        var nextInfo: NextInfo = NextInfo(),
         val updatedTime: Long = System.currentTimeMillis(),
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = SEARCH_RESULT_ID)
@@ -26,7 +29,16 @@ data class MediumSearchResult(
     }
 
     enum class SearchCategoryOptionType(val bit: Int) {
-        kakaoImage(1), kakaoVClip(2), naverImage(4), all(7)
+        kakaoImage(1), kakaoVClip(2), naverImage(4), all(7);
+
+        companion object {
+            @JvmStatic
+            fun categoryTypeFromBit(bit: Int): SearchCategoryOptionType {
+                return SearchCategoryOptionType.values().find {
+                    it.bit == bit
+                } ?: SearchCategoryOptionType.all
+            }
+        }
     }
 
     enum class SearchSortType {
@@ -34,4 +46,26 @@ data class MediumSearchResult(
     }
 }
 
+object SortTypeConverter {
+    @TypeConverter
+    fun toSortTypee(value: String): MediumSearchResult.SearchSortType {
+        return MediumSearchResult.SearchSortType.valueOf(value)
+    }
 
+    @TypeConverter
+    fun toStringName(sortType: MediumSearchResult.SearchSortType): String {
+        return sortType.name
+    }
+}
+
+object CategoryTypeConverter {
+    @TypeConverter
+    fun toCategoryTypee(value: Int): MediumSearchResult.SearchCategoryOptionType {
+        return MediumSearchResult.SearchCategoryOptionType.categoryTypeFromBit(value)
+    }
+
+    @TypeConverter
+    fun toStringName(sortType: MediumSearchResult.SearchCategoryOptionType): Int {
+        return sortType.bit
+    }
+}

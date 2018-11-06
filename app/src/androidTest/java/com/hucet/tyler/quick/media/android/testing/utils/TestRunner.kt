@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.hucet.tyler.quick.media
+package com.hucet.tyler.quick.media.android.testing.utils
+
+import android.app.Application
+import android.content.Context
+import androidx.test.runner.AndroidJUnitRunner
+import com.hucet.tyler.quick.media.android.testing.TestApp
 
 /**
- * This annotation allows us to open some classes for mocking purposes while they are final in
- * release builds.
+ * Custom runner to disable dependency injection.
  */
-@Target(AnnotationTarget.ANNOTATION_CLASS)
-annotation class OpenClass
-
-/**
- * Annotate a class with [OpenForTesting] if you want it to be extendable in debug builds.
- */
-@OpenClass
-@Target(AnnotationTarget.CLASS)
-annotation class OpenForTesting
+class TestRunner : AndroidJUnitRunner() {
+    override fun newApplication(cl: ClassLoader, className: String, context: Context): Application {
+        return super.newApplication(cl, TestApp::class.java.name, context)
+    }
+}
