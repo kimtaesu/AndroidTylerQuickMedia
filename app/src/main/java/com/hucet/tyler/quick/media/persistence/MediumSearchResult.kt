@@ -1,23 +1,24 @@
 package com.hucet.tyler.quick.media.persistence
 
+import androidx.annotation.IntDef
 import androidx.room.*
+import com.hucet.tyler.quick.media.api.KakaoRequest
 import com.hucet.tyler.quick.media.persistence.MediumSearchResult.Companion.SEARCH_RESULT_TABLE
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.*
+
 
 @Entity(
         tableName = SEARCH_RESULT_TABLE,
-        indices = [Index("query")]
+        indices = [Index("query", "sortType", unique = true)]
 )
-
+@TypeConverters(PageInfosConverters::class)
 data class MediumSearchResult(
         val query: String,
-//        @TypeConverters(SortTypeConverter::class)
-//        var sortType: SearchSortType = SearchSortType.recency,
-//        @TypeConverters(SearchCategoryOptionType::class)
-//        var categoryType: Int = SearchCategoryOptionType.all.bit,
-//        @Embedded
-//        @TypeConverters(DataSourceTypeConverter::class)
-//        var nextInfo: NextInfo = NextInfo(),
+        var pageInfos: Map<String, PageInfo>,
+        @SearchOptions.SortType var sortType: Int = SearchOptions.accuracy,
+        @SearchOptions.CategoryType var categoryType: Int = SearchOptions.all,
         val updatedTime: Long = System.currentTimeMillis(),
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = SEARCH_RESULT_ID)
@@ -28,44 +29,44 @@ data class MediumSearchResult(
         const val SEARCH_RESULT_TABLE = "search_results"
     }
 
-    enum class SearchCategoryOptionType(val bit: Int) {
-        kakaoImage(1), kakaoVClip(2), naverImage(4), all(7);
+    object SearchOptions {
+        const val accuracy = 0;
+        const val recency = 1;
 
-        companion object {
-            @JvmStatic
-            fun categoryTypeFromBit(bit: Int): SearchCategoryOptionType {
-                return SearchCategoryOptionType.values().find {
-                    it.bit == bit
-                } ?: SearchCategoryOptionType.all
-            }
+        @IntDef(accuracy, recency)
+        @Retention(AnnotationRetention.SOURCE)
+        annotation class SortType
+
+        const val kakaoImage = 1
+        const val kakaoVClip = 2
+        const val naverImage = 4
+        const val all = kakaoImage + kakaoVClip + naverImage
+        const val kakao = kakaoImage + kakaoVClip
+        const val naver = naverImage
+
+        @IntDef(kakaoImage, kakaoVClip, naverImage)
+        @Retention(AnnotationRetention.SOURCE)
+        annotation class CategoryType
+    }
+}
+
+
+class PageInfosConverters {
+    private val gson = Gson()
+
+    @TypeConverter
+    fun stringToPageInfoList(data: String?): Map<String, PageInfo> {
+        if (data == null) {
+            return PageInfo.initPageInfos()
         }
-    }
 
-    enum class SearchSortType {
-        accuracy, recency
-    }
-}
+        val listType = object : TypeToken<Map<String, PageInfo>>() {}.type
 
-object SortTypeConverter {
-    @TypeConverter
-    fun toSortTypee(value: String): MediumSearchResult.SearchSortType {
-        return MediumSearchResult.SearchSortType.valueOf(value)
+        return gson.fromJson(data, listType)
     }
 
     @TypeConverter
-    fun toStringName(sortType: MediumSearchResult.SearchSortType): String {
-        return sortType.name
-    }
-}
-
-object CategoryTypeConverter {
-    @TypeConverter
-    fun toCategoryTypee(value: Int): MediumSearchResult.SearchCategoryOptionType {
-        return MediumSearchResult.SearchCategoryOptionType.categoryTypeFromBit(value)
-    }
-
-    @TypeConverter
-    fun toStringName(sortType: MediumSearchResult.SearchCategoryOptionType): Int {
-        return sortType.bit
+    fun pageInfoListToString(someObjects: Map<String, PageInfo>): String {
+        return gson.toJson(someObjects)
     }
 }
