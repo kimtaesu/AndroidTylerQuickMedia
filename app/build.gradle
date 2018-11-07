@@ -49,7 +49,6 @@ android {
         test.java.srcDirs += "src/test-common/java"
     }
 }
-
 dependencies {
     debugImplementation deps.leakcanary.debug
     releaseImplementation deps.leakcanary.release
@@ -95,7 +94,9 @@ dependencies {
     testImplementation deps.mock_web_server
     testImplementation deps.arch_core.testing
     testImplementation deps.mockito.core
+    testImplementation deps.mock_kotlin
     testImplementation deps.robolectric
+    testImplementation deps.androidX.test.core
 
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.atsl.rules
@@ -111,6 +112,7 @@ dependencies {
 
     androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.mockito.core
+    testCompile "io.kotlintest:kotlintest-assertions:3.1.8"
 }
 
 

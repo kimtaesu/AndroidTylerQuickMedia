@@ -87,7 +87,7 @@ androidX.test.espressoCore = "androidx.test.espresso:espresso-core:$versions.and
 androidX.test.espressoContrib = "androidx.test.espresso:espresso-contrib:$versions.androidX.espresso"
 androidX.test.monitor = "androidx.test:monitor:$versions.androidX.monitor"
 androidX.test.archCore = "androidx.arch.core:core-testing:$versions.androidX.arch"
-
+androidX.test.core = "androidx.test:core:1.0.0-beta02"
 deps.androidX = androidX
 
 

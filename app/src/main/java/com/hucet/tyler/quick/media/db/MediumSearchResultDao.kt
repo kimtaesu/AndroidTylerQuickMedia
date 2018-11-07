@@ -13,6 +13,8 @@ import io.reactivex.Single
 @OpenForTesting
 abstract class MediumSearchResultDao : BaseDao<MediumSearchResult> {
     @Query("select * from search_results where `query` = :keyword and sortType = :sortType")
-    abstract fun search(keyword: String, sortType: Int): Single<MediumSearchResult>
+    abstract fun search(keyword: String, sortType: Int): LiveData<MediumSearchResult>
 
+    @Query("select * from search_results where `query` = :keyword")
+    abstract fun searchMediumByQuery(keyword: String): LiveData<List<MediumSearchResult>>
 }
