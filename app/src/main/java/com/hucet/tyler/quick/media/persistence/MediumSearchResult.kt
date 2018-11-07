@@ -11,7 +11,7 @@ import java.util.*
 
 @Entity(
         tableName = SEARCH_RESULT_TABLE,
-        indices = [Index("query", "sortType", unique = true)]
+        primaryKeys = ["query", "sortType"]
 )
 @TypeConverters(PageInfosConverters::class)
 data class MediumSearchResult(
@@ -19,11 +19,8 @@ data class MediumSearchResult(
         var pageInfos: Map<String, PageInfo> = PageInfo.initPageInfos(),
         @SearchOptions.SortType var sortType: Int = SearchOptions.accuracy,
         @SearchOptions.CategoryType var categoryType: Int = SearchOptions.all,
-        val updatedTime: Long = System.currentTimeMillis(),
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = SEARCH_RESULT_ID)
-        var id: Long = 0
-) {
+        val updatedTime: Long = System.currentTimeMillis()
+        ) {
     companion object {
         const val SEARCH_RESULT_ID = "search_result_id"
         const val SEARCH_RESULT_TABLE = "search_results"

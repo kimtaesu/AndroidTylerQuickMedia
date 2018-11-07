@@ -7,13 +7,7 @@ import com.hucet.tyler.quick.media.persistence.NaverImage.Companion.NAVER_IMAGE_
 import java.util.*
 
 @Entity(
-        tableName = NAVER_IMAGE_TABLE,
-        indices = [Index(MediumSearchResult.SEARCH_RESULT_ID)],
-        foreignKeys = [(ForeignKey(
-                entity = MediumSearchResult::class,
-                parentColumns = [(MediumSearchResult.SEARCH_RESULT_ID)],
-                childColumns = [(MediumSearchResult.SEARCH_RESULT_ID)]
-        ))]
+        tableName = NAVER_IMAGE_TABLE
 )
 data class NaverImage(
         @SerializedName("link")
@@ -21,8 +15,11 @@ data class NaverImage(
         val title: String,
         override val thumbnail: String,
         val sizeheight: String,
-        val sizewidth: String
-) : BasicMedia() {
+        val sizewidth: String,
+        @PrimaryKey(autoGenerate = true)
+        @ColumnInfo(name = NAVER_IMAGE_ID)
+        var id: Long = 0
+) : HasMedia {
     companion object {
         const val NAVER_IMAGE_TABLE = "naver_images"
         const val NAVER_IMAGE_ID = "naver_image_id"

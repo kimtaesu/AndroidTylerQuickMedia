@@ -8,13 +8,7 @@ import com.hucet.tyler.quick.media.persistence.MediumSearchResult.Companion.SEAR
 import java.util.*
 
 @Entity(
-        tableName = KAKAO_VCLIP_TABLE,
-        indices = [Index(SEARCH_RESULT_ID)],
-        foreignKeys = [(ForeignKey(
-                entity = MediumSearchResult::class,
-                parentColumns = [(SEARCH_RESULT_ID)],
-                childColumns = [(SEARCH_RESULT_ID)]
-        ))]
+        tableName = KAKAO_VCLIP_TABLE
 )
 data class KakaoVclip(val title: String,
                       @SerializedName("url")
@@ -24,9 +18,12 @@ data class KakaoVclip(val title: String,
                       val playTime: Int,
                       val author: String,
                       @SerializedName("datetime")
-                      val datetime: String
+                      val datetime: String,
+                      @PrimaryKey(autoGenerate = true)
+                      @ColumnInfo(name = KAKAO_VCLIP_ID)
+                      var id: Long = 0
 
-) : BasicMedia() {
+) : HasMedia {
     companion object {
         const val KAKAO_VCLIP_TABLE = "kakao_vclips"
         const val KAKAO_VCLIP_ID = "kakao_vclip_id"
